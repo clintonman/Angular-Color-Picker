@@ -1,0 +1,102 @@
+September 4 2015
+
+Goal: translate Dyers photoshop color picker to angularjs
+
+first part get initial colors working with radio buttons, then text inputs then via sliders
+idea is to update all the color reps first then use that to update the view?
+
+moved some styles out of javascript and into css
+
+get idea for how to organize
+get out of global address space
+
+problem with ng-style can't have image and background color together. never makes it out of ng-style into the actual style of the browser
+
+included jquery so could select items and change styles(background color and opacity) - maybe later try newer angularjs and try look at source code to see why it failed
+
+was up almost all night esp with the styles problem and radio buttons problem
+
+radio buttons needed an object to work with
+
+standard html doctype broke the alignment of the layers, may need a "zero" css to fix?
+remove alt img attribute the main area slightly better, bar area still broken
+float left fixed the problem
+
+
+compare results of original to angular version in browser was very helpful - shows lack of ng-style transfer
+removed all ng-styles that combined image and background colors/opacity
+
+at end and maybe during change the naming conventions more descriptive
+
+September 4 2015, 2:25pm
+result is good ready to do text event updates
+
+use form of $scope.onHsvChange = function() {
+not the form of onHsvChange() {
+also for text field change value= to ng-change=
+
+5:49pm
+looks like use of ng-style might have been wrong? ng-style={{name}} vs ng-style="name" ?
+hsv test is good, will need error checking added, test is good so maybe not?
+
+rgb and hsv look good, hex has some error issues
+definetly need error checking on all input fields
+
+original code hex error checks not perfect, needs improvement
+
+7:47pm
+$event is same as value from jQuery when jQuery is installed(or similar jqlite if not installed)
+see docs for Expressions
+no drag so will need use mouse over, mousedown and mouse update
+original has indicators in body and can continue drag outside of the map and bar areas
+? should this be absolute rel to parent or to document body ?
+cumulativeOffset is from prototype - gets offset of element from the top left corner of document, jquery has one too?
+jquery offset can read and right position of element
+
+plan use angular events and jquery offset and pointers in body
+
+September 5 2015
+8:54pm
+need use event.preventDefault() for the mouse down so can read the mouse move events with the button held down
+have coordinates from mouse relative to the map image, next figure out the positioning of the indicator
+10:33pm
+empty functions in place, note may need to account for scrolling and calc pos of bar and slider constantly?
+really seeing the advantage of objects/"classes" can easily see where it needs to be broken down
+
+September 6 2015
+3:23pm
+put map and sliders into objects now - just makes sense, also started renaming stuff so it makes sense - like bar doesnt refer to both bar and map
+5:50pm
+initial indicator position looks ok, next add mouse click and drag
+a lot of cleanup to do
+8:52pm
+new problem - indicators move to the mouse location, but then a leave event fires stopping the drag action
+solution style="pointer-events:none"
+10:30pm
+got s color mode updating from mouse on map area, home stretch for first working version
+original has 2 different functions for slider and map mouse control values - add same name function but not to prototype
+so different behavior for same function
+
+TODO - remove console.logs, finish code, cleanup, reorganize, fine tune then publish
+
+September 7 2015
+9:06am
+indicators not updating from text fields, mouse close but not full range of values, awkward when leave map/slider area
+indicator fix quick and easy, now awkward and full range problem plus cleanup/organize code
+7:22pm
+moved mousemove to the containing div and added flag for mousedown in bar and map areas - it's working greate now
+only thing is can't drag on indicators directly
+another easy solution just add mousedown map and bar to the indicators, so removed the style pointer-events: none
+now it is all working very well!
+added mouseleave act same as mouseup
+
+angular.element(document.querySelector('#myElement')) <-- maybe for no jquery
+also $document that needs to be injected <-- is $document better then document???
+also $window.document
+
+from:http://stackoverflow.com/questions/15576362/angularjs-dom-document-selections-without-jquery
+$document is a wrapper, true. Maybe one of the Angular authors could confirm this, but I think it was not meant to be injected into directives. Neither is $window. Its only for the rare conditions and cases where you need to deal with $window or $document in a Controller or a Service.
+
+When you are in a directive, the DOM is assumed. So, feel free to use document or window directly if you wish.
+
+The way angular is designed, you dont need complex selectors. If you are doing a complex selection ( even inside directives ) there is probably a simpler way to do it. Note that the directive gives you access directly to the element to which it is attached. Now you should be concerned mostly with the elements around your element, perhaps elements that are like siblings or direct children. If you are looking for nodes that are somewhere else, then that is the first sign of a "smell". 
