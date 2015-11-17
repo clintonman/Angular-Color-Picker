@@ -4,8 +4,17 @@ MIT style license
 */
 (function () {
     angular.module("DyerColorPicker", []);
+    
+    angular.module('DyerColorPicker').directive("icrcolorPicker", function(){
+        console.log("create directive");
+        return {
+            replace: true,
+            templateUrl: 'refresh_web/colorpicker/colorpickertemplate.html'
+        }
+    });
 
     angular.module('DyerColorPicker').controller("MainController", function ($scope, colormethods, positionindicatorfactory) {
+
         var clientFilesPath = 'refresh_web/colorpicker/images/';
 
         $scope.RadioClick = function () {
@@ -738,3 +747,13 @@ MIT style license
 
 })();
 //app.controller(MainController, "MainController");
+
+/*(function () {
+    angular.module('DyerColorPicker').directive("icrcolorPicker", function(){
+        console.log("create directive");
+        return {
+            replace: true,
+            templateUrl: 'refresh_web/colorpicker/colorpickertemplate.html'
+        }
+    });
+})();*/
