@@ -18,118 +18,118 @@ var MainController = function ($scope, colormethods, positionindicatorfactory) {
 
     var _map = positionindicatorfactory["_map"];
     var _slider = positionindicatorfactory["_slider"];
-    
+
     _map.ValueChanged = function () {
         // update values
 
         switch (ColorMode) {
-        case 'h':
-            $scope.cp1_Saturation_val = this.xValue;
-            $scope.cp1_Brightness_val = 100 - this.yValue;
-            break;
+            case 'h':
+                $scope.cp1_Saturation_val = this.xValue;
+                $scope.cp1_Brightness_val = 100 - this.yValue;
+                break;
 
-        case 's':
+            case 's':
                 $scope.cp1_Hue_val = this.xValue;
                 $scope.cp1_Brightness_val = 100 - this.yValue;
-            break;
+                break;
 
-        case 'v':
-            $scope.cp1_Hue_val = this.xValue;
-            $scope.cp1_Saturation_val = 100 - this.yValue;
-            break;
+            case 'v':
+                $scope.cp1_Hue_val = this.xValue;
+                $scope.cp1_Saturation_val = 100 - this.yValue;
+                break;
 
-        case 'r':
-            $scope.cp1_Blue_val = this.xValue;
-            $scope.cp1_Green_val = 256 - this.yValue;
-            break;
+            case 'r':
+                $scope.cp1_Blue_val = this.xValue;
+                $scope.cp1_Green_val = 256 - this.yValue;
+                break;
 
-        case 'g':
-            $scope.cp1_Blue_val = this.xValue;
-            $scope.cp1_Red_val = 256 - this.yValue;
-            break;
+            case 'g':
+                $scope.cp1_Blue_val = this.xValue;
+                $scope.cp1_Red_val = 256 - this.yValue;
+                break;
 
-        case 'b':
-            $scope.cp1_Red_val = this.xValue;
-            $scope.cp1_Green_val = 256 - this.yValue;
-            break;
+            case 'b':
+                $scope.cp1_Red_val = this.xValue;
+                $scope.cp1_Green_val = 256 - this.yValue;
+                break;
         }
 
         switch (ColorMode) {
-        case 'h':
-        case 's':
-        case 'v':
+            case 'h':
+            case 's':
+            case 'v':
                 setHsv({
-            h: $scope.cp1_Hue_val,
-            s: $scope.cp1_Saturation_val,
-            v: $scope.cp1_Brightness_val
-        });
-            break;
+                    h: $scope.cp1_Hue_val,
+                    s: $scope.cp1_Saturation_val,
+                    v: $scope.cp1_Brightness_val
+                });
+                break;
 
-        case 'r':
-        case 'g':
-        case 'b':
+            case 'r':
+            case 'g':
+            case 'b':
                 setRgb({
-            r: $scope.cp1_Red_val,
-            g: $scope.cp1_Green_val,
-            b: $scope.cp1_Blue_val
-        });
-            break;
+                    r: $scope.cp1_Red_val,
+                    g: $scope.cp1_Green_val,
+                    b: $scope.cp1_Blue_val
+                });
+                break;
         }
 
         updateVisuals();
     };
-    
-    _slider.ValueChanged = function() {
-		
-		switch(ColorMode) {
-			case 'h':
-				$scope.cp1_Hue_val = 360 - this.yValue;
-				break;
-			case 's':
-				$scope.cp1_Saturation_val = 100 - this.yValue;
-				break;
-			case 'v':
-				$scope.cp1_Brightness_val = 100 - this.yValue;
-				break;
-				
-			case 'r':
-				$scope.cp1_Red_val = 255 - this.yValue;
-				break;
-			case 'g':
-				$scope.cp1_Green_val = 255 - this.yValue;
-				break;
-			case 'b':
-				$scope.cp1_Blue_val = 255 - this.yValue;
-				break;				
-		}
-		
-		switch(ColorMode) {
-			case 'h':
-			case 's':
-			case 'v':
+
+    _slider.ValueChanged = function () {
+
+        switch (ColorMode) {
+            case 'h':
+                $scope.cp1_Hue_val = 360 - this.yValue;
+                break;
+            case 's':
+                $scope.cp1_Saturation_val = 100 - this.yValue;
+                break;
+            case 'v':
+                $scope.cp1_Brightness_val = 100 - this.yValue;
+                break;
+
+            case 'r':
+                $scope.cp1_Red_val = 255 - this.yValue;
+                break;
+            case 'g':
+                $scope.cp1_Green_val = 255 - this.yValue;
+                break;
+            case 'b':
+                $scope.cp1_Blue_val = 255 - this.yValue;
+                break;
+        }
+
+        switch (ColorMode) {
+            case 'h':
+            case 's':
+            case 'v':
                 setHsv({
-            h: $scope.cp1_Hue_val,
-            s: $scope.cp1_Saturation_val,
-            v: $scope.cp1_Brightness_val
-        });
-				break;
-				
-			case 'r':
-			case 'g':
-			case 'b':
+                    h: $scope.cp1_Hue_val,
+                    s: $scope.cp1_Saturation_val,
+                    v: $scope.cp1_Brightness_val
+                });
+                break;
+
+            case 'r':
+            case 'g':
+            case 'b':
                 setRgb({
-            r: $scope.cp1_Red_val,
-            g: $scope.cp1_Green_val,
-            b: $scope.cp1_Blue_val
-        });
-				break;				
-		}		
+                    r: $scope.cp1_Red_val,
+                    g: $scope.cp1_Green_val,
+                    b: $scope.cp1_Blue_val
+                });
+                break;
+        }
 
-		updateVisuals();
-	};
+        updateVisuals();
+    };
 
 
-    
+
     //NOT UNDERSTANDING SOMETHING -why need define? maybe because is a function and var is private to it, need : format?
     //rest stuff below is defining public versions so it works?
     _map.mouse = {};
@@ -186,12 +186,12 @@ var MainController = function ($scope, colormethods, positionindicatorfactory) {
         //console.log(msg);
         _map.mouse.x = event.pageX;
         _map.mouse.y = event.pageY;
-        
+
         event.preventDefault();
         _map.setValuesFromMousePosition();
-        
+
         mapactive = true;
-   
+
     };
 
     $scope.barmousedown = function (event) {
@@ -205,7 +205,7 @@ var MainController = function ($scope, colormethods, positionindicatorfactory) {
         _slider.mouse.y = event.pageY;
         _slider.setValuesFromMousePosition();
         event.preventDefault();
-         baractive = true;
+        baractive = true;
     };
 
     $scope.mouseup = function (event) {
@@ -214,25 +214,25 @@ var MainController = function ($scope, colormethods, positionindicatorfactory) {
         mapactive = false;
         baractive = false;
     };
-    
+
     $scope.mouseleave = function (event) {
 
         theMouseIsDown = false;
         mapactive = false;
         baractive = false;
     };
-    
-    
+
+
     $scope.mousemove = function (event) {
         if (!theMouseIsDown)
             return;
 
-        if(mapactive) {
+        if (mapactive) {
             _map.mouse.x = event.pageX;
             _map.mouse.y = event.pageY;
             _map.setValuesFromMousePosition();
         }
-         if(baractive) {
+        if (baractive) {
             _slider.mouse.x = event.pageX;
             _slider.mouse.y = event.pageY;
             _slider.setValuesFromMousePosition();
@@ -269,7 +269,7 @@ var MainController = function ($scope, colormethods, positionindicatorfactory) {
             positionMapAndSliderArrows();
         }
     };
-    
+
     function setHsv(hsv) {
         var rgb = colormethods.hsvToRgb(hsv);
         $scope.cp1_Red_val = rgb.r;
@@ -374,7 +374,7 @@ var MainController = function ($scope, colormethods, positionindicatorfactory) {
     $scope.cp1_Hue_val = hsv.h;
     $scope.cp1_Saturation_val = hsv.s;
     $scope.cp1_Brightness_val = hsv.v;
-    
+
     setColorMode(settings.startMode);
 
     $scope.cp1_Preview_style["background-color"] = '#' + $scope.cp1_Hex;
@@ -401,29 +401,29 @@ var MainController = function ($scope, colormethods, positionindicatorfactory) {
         // Slider
         var sliderValue = 0;
         switch (ColorMode) {
-        case 'h':
-            sliderValue = maxHue - $scope.cp1_Hue_val;
-            break;
+            case 'h':
+                sliderValue = maxHue - $scope.cp1_Hue_val;
+                break;
 
-        case 's':
-            sliderValue = maxSaturation - $scope.cp1_Saturation_val;
-            break;
+            case 's':
+                sliderValue = maxSaturation - $scope.cp1_Saturation_val;
+                break;
 
-        case 'v':
-            sliderValue = maxBright - $scope.cp1_Brightness_val;
-            break;
+            case 'v':
+                sliderValue = maxBright - $scope.cp1_Brightness_val;
+                break;
 
-        case 'r':
-            sliderValue = maxRGB - $scope.cp1_Red_val;
-            break;
+            case 'r':
+                sliderValue = maxRGB - $scope.cp1_Red_val;
+                break;
 
-        case 'g':
-            sliderValue = maxRGB - $scope.cp1_Green_val;
-            break;
+            case 'g':
+                sliderValue = maxRGB - $scope.cp1_Green_val;
+                break;
 
-        case 'b':
-            sliderValue = maxRGB - $scope.cp1_Blue_val;
-            break;
+            case 'b':
+                sliderValue = maxRGB - $scope.cp1_Blue_val;
+                break;
         }
 
         _slider.yValue = sliderValue;
@@ -433,35 +433,35 @@ var MainController = function ($scope, colormethods, positionindicatorfactory) {
         var mapXValue = 0;
         var mapYValue = 0;
         switch (ColorMode) {
-        case 'h':
-            mapXValue = $scope.cp1_Saturation_val;
-            mapYValue = maxBright - $scope.cp1_Brightness_val;
-            break;
+            case 'h':
+                mapXValue = $scope.cp1_Saturation_val;
+                mapYValue = maxBright - $scope.cp1_Brightness_val;
+                break;
 
-        case 's':
-            mapXValue = $scope.cp1_Hue_val;
-            mapYValue = maxBright - $scope.cp1_Brightness_val;
-            break;
+            case 's':
+                mapXValue = $scope.cp1_Hue_val;
+                mapYValue = maxBright - $scope.cp1_Brightness_val;
+                break;
 
-        case 'v':
-            mapXValue = $scope.cp1_Hue_val;
-            mapYValue = maxSaturation - $scope.cp1_Saturation_val;
-            break;
+            case 'v':
+                mapXValue = $scope.cp1_Hue_val;
+                mapYValue = maxSaturation - $scope.cp1_Saturation_val;
+                break;
 
-        case 'r':
-            mapXValue = $scope.cp1_Blue_val;
-            mapYValue = maxRGB - $scope.cp1_Green_val;
-            break;
+            case 'r':
+                mapXValue = $scope.cp1_Blue_val;
+                mapYValue = maxRGB - $scope.cp1_Green_val;
+                break;
 
-        case 'g':
-            mapXValue = $scope.cp1_Blue_val;
-            mapYValue = maxRGB - $scope.cp1_Red_val;
-            break;
+            case 'g':
+                mapXValue = $scope.cp1_Blue_val;
+                mapYValue = maxRGB - $scope.cp1_Red_val;
+                break;
 
-        case 'b':
-            mapXValue = $scope.cp1_Red_val;
-            mapYValue = maxRGB - $scope.cp1_Green_val;
-            break;
+            case 'b':
+                mapXValue = $scope.cp1_Red_val;
+                mapYValue = maxRGB - $scope.cp1_Green_val;
+                break;
         }
         _map.xValue = mapXValue;
         _map.yValue = mapYValue;
@@ -472,97 +472,97 @@ var MainController = function ($scope, colormethods, positionindicatorfactory) {
     function updateMapVisuals() {
 
         switch (ColorMode) {
-        case 'h':
-            // fake color with only hue
-            var hsv = {
-                h: $scope.cp1_Hue_val,
-                s: 100,
-                v: 100
-            };
-            var rgb = colormethods.hsvToRgb(hsv);
-            var hexval = colormethods.rgbToHex(rgb);
+            case 'h':
+                // fake color with only hue
+                var hsv = {
+                    h: $scope.cp1_Hue_val,
+                    s: 100,
+                    v: 100
+                };
+                var rgb = colormethods.hsvToRgb(hsv);
+                var hexval = colormethods.rgbToHex(rgb);
 
-            angular.element('#cp1_mapL1').css('background-color', '#' + hexval);
-            break;
+                angular.element('#cp1_mapL1').css('background-color', '#' + hexval);
+                break;
 
-        case 's':
-            angular.element('#cp1_mapL2').css('opacity', (100 - $scope.cp1_Saturation_val) / 100);
-            break;
+            case 's':
+                angular.element('#cp1_mapL2').css('opacity', (100 - $scope.cp1_Saturation_val) / 100);
+                break;
 
-        case 'v':
-            angular.element('#cp1_mapL2').css('opacity', $scope.cp1_Brightness_val / 100);
-            break;
+            case 'v':
+                angular.element('#cp1_mapL2').css('opacity', $scope.cp1_Brightness_val / 100);
+                break;
 
-        case 'r':
-            angular.element('#cp1_mapL2').css('opacity', $scope.cp1_Red_val / 256);
-            break;
+            case 'r':
+                angular.element('#cp1_mapL2').css('opacity', $scope.cp1_Red_val / 256);
+                break;
 
-        case 'g':
-            angular.element('#cp1_mapL2').css('opacity', $scope.cp1_Green_val / 256);
-            break;
+            case 'g':
+                angular.element('#cp1_mapL2').css('opacity', $scope.cp1_Green_val / 256);
+                break;
 
-        case 'b':
-            angular.element('#cp1_mapL2').css('opacity', $scope.cp1_Blue_val / 256);
-            break;
+            case 'b':
+                angular.element('#cp1_mapL2').css('opacity', $scope.cp1_Blue_val / 256);
+                break;
         }
     }
 
     function updateSliderVisuals() {
         switch (ColorMode) {
-        case 'h':
-            break;
+            case 'h':
+                break;
 
-        case 's':
-            var saturatedColor = {
-                h: $scope.cp1_Hue_val,
-                s: 100,
-                v: $scope.cp1_Brightness_val
-            };
-            var rgb = colormethods.hsvToRgb(saturatedColor);
-            var hexval = colormethods.rgbToHex(rgb);
-            angular.element('#cp1_barL3').css('background-color', '#' + hexval);
-            break;
+            case 's':
+                var saturatedColor = {
+                    h: $scope.cp1_Hue_val,
+                    s: 100,
+                    v: $scope.cp1_Brightness_val
+                };
+                var rgb = colormethods.hsvToRgb(saturatedColor);
+                var hexval = colormethods.rgbToHex(rgb);
+                angular.element('#cp1_barL3').css('background-color', '#' + hexval);
+                break;
 
-        case 'v':
-            var valueColor = {
-                h: $scope.cp1_Hue_val,
-                s: $scope.cp1_Saturation_val,
-                v: 100
-            };
-            var rgb = colormethods.hsvToRgb(valueColor);
-            var hexval = colormethods.rgbToHex(rgb);
-            angular.element('#cp1_barL3').css('background-color', '#' + hexval);
-            break;
-        case 'r':
-        case 'g':
-        case 'b':
+            case 'v':
+                var valueColor = {
+                    h: $scope.cp1_Hue_val,
+                    s: $scope.cp1_Saturation_val,
+                    v: 100
+                };
+                var rgb = colormethods.hsvToRgb(valueColor);
+                var hexval = colormethods.rgbToHex(rgb);
+                angular.element('#cp1_barL3').css('background-color', '#' + hexval);
+                break;
+            case 'r':
+            case 'g':
+            case 'b':
 
-            var hValue = 0;
-            var vValue = 0;
+                var hValue = 0;
+                var vValue = 0;
 
-            if (this.ColorMode == 'r') {
-                hValue = $scope.cp1_Blue_val;
-                vValue = $scope.cp1_Green_val;
-            } else if (this.ColorMode == 'g') {
-                hValue = $scope.cp1_Blue_val;
-                vValue = $scope.cp1_Red_val;
-            } else if (this.ColorMode == 'b') {
-                hValue = $scope.cp1_Red_val;
-                vValue = $scope.cp1_Green_val;
-            }
+                if (this.ColorMode == 'r') {
+                    hValue = $scope.cp1_Blue_val;
+                    vValue = $scope.cp1_Green_val;
+                } else if (this.ColorMode == 'g') {
+                    hValue = $scope.cp1_Blue_val;
+                    vValue = $scope.cp1_Red_val;
+                } else if (this.ColorMode == 'b') {
+                    hValue = $scope.cp1_Red_val;
+                    vValue = $scope.cp1_Green_val;
+                }
 
-            var horzPer = (hValue / 256);
-            var vertPer = (vValue / 256);
+                var horzPer = (hValue / 256);
+                var vertPer = (vValue / 256);
 
-            var horzPerRev = ((256 - hValue) / 256);
-            var vertPerRev = ((256 - vValue) / 256);
+                var horzPerRev = ((256 - hValue) / 256);
+                var vertPerRev = ((256 - vValue) / 256);
 
-            angular.element('#cp1_barL4').css('opacity', '#' + (vertPer > horzPerRev) ? horzPerRev : vertPer);
-            angular.element('#cp1_barL3').css('opacity', '#' + (vertPer > horzPer) ? horzPer : vertPer);
-            angular.element('#cp1_barL2').css('opacity', '#' + (vertPerRev > horzPer) ? horzPer : vertPerRev);
-            angular.element('#cp1_barL1').css('opacity', '#' + (vertPerRev > horzPerRev) ? horzPerRev : vertPerRev);
+                angular.element('#cp1_barL4').css('opacity', '#' + (vertPer > horzPerRev) ? horzPerRev : vertPer);
+                angular.element('#cp1_barL3').css('opacity', '#' + (vertPer > horzPer) ? horzPer : vertPer);
+                angular.element('#cp1_barL2').css('opacity', '#' + (vertPerRev > horzPer) ? horzPer : vertPerRev);
+                angular.element('#cp1_barL1').css('opacity', '#' + (vertPerRev > horzPerRev) ? horzPerRev : vertPerRev);
 
-            break;
+                break;
 
         }
     }
@@ -592,140 +592,140 @@ var MainController = function ($scope, colormethods, positionindicatorfactory) {
 
 
         switch (colorMode) {
-        case 'h':
-            $scope.cp1_Mode.thesel = 'h';
+            case 'h':
+                $scope.cp1_Mode.thesel = 'h';
 
-            // MAP
-            // put a color layer on the bottom
-            angular.element('#cp1_mapL1').css('background-color', '#' + $scope.cp1_Hex);
+                // MAP
+                // put a color layer on the bottom
+                angular.element('#cp1_mapL1').css('background-color', '#' + $scope.cp1_Hex);
 
-            // add a hue map on the top
-            angular.element('#cp1_mapL2').css('background-color', 'transparent');
-            $scope.cp1_mapL2_src = clientFilesPath + 'map-hue.png';
-            angular.element('#cp1_mapL2').css('opacity', 1);
+                // add a hue map on the top
+                angular.element('#cp1_mapL2').css('background-color', 'transparent');
+                $scope.cp1_mapL2_src = clientFilesPath + 'map-hue.png';
+                angular.element('#cp1_mapL2').css('opacity', 1);
 
-            // SLIDER
-            // simple hue map
-            $scope.cp1_barL4_src = clientFilesPath + 'bar-hue.png';
+                // SLIDER
+                // simple hue map
+                $scope.cp1_barL4_src = clientFilesPath + 'bar-hue.png';
 
-            _map.xMaxValue = 100;
-            _map.yMaxValue = 100;
-            _slider.yMaxValue = 359;
+                _map.xMaxValue = 100;
+                _map.yMaxValue = 100;
+                _slider.yMaxValue = 359;
 
-            break;
+                break;
 
-        case 's':
-            //this._saturationRadio.checked = true;	
-            $scope.cp1_Mode.thesel = 's';
+            case 's':
+                //this._saturationRadio.checked = true;	
+                $scope.cp1_Mode.thesel = 's';
 
-            // MAP
-            // bottom has saturation map
-            $scope.cp1_mapL1_src = clientFilesPath + 'map-saturation.png';
+                // MAP
+                // bottom has saturation map
+                $scope.cp1_mapL1_src = clientFilesPath + 'map-saturation.png';
 
-            // top has overlay
-            $scope.cp1_mapL2_src = clientFilesPath + 'map-saturation-overlay.png';
-            angular.element('#cp1_mapL2').css('opacity', 0);
+                // top has overlay
+                $scope.cp1_mapL2_src = clientFilesPath + 'map-saturation-overlay.png';
+                angular.element('#cp1_mapL2').css('opacity', 0);
 
-            // SLIDER
-            // bottom: color
-            angular.element('#cp1_barL3').css('background-color', '#' + $scope.cp1_Hex);
+                // SLIDER
+                // bottom: color
+                angular.element('#cp1_barL3').css('background-color', '#' + $scope.cp1_Hex);
 
-            // top: graduated overlay
-            $scope.cp1_barL4_src = clientFilesPath + 'bar-saturation.png';
+                // top: graduated overlay
+                $scope.cp1_barL4_src = clientFilesPath + 'bar-saturation.png';
 
-            _map.xMaxValue = 359;
-            _map.yMaxValue = 100;
-            _slider.yMaxValue = 100;
+                _map.xMaxValue = 359;
+                _map.yMaxValue = 100;
+                _slider.yMaxValue = 100;
 
-            break;
+                break;
 
-        case 'v':
-            $scope.cp1_Mode.thesel = 'v';
+            case 'v':
+                $scope.cp1_Mode.thesel = 'v';
 
-            // MAP
-            // bottom: nothing
+                // MAP
+                // bottom: nothing
 
-            // top
-            angular.element('#cp1_mapL1').css('background-color', '#000');
-            $scope.cp1_mapL2_src = clientFilesPath + 'map-brightness.png';
+                // top
+                angular.element('#cp1_mapL1').css('background-color', '#000');
+                $scope.cp1_mapL2_src = clientFilesPath + 'map-brightness.png';
 
-            // SLIDER
-            // bottom
-            angular.element('#cp1_barL3').css('background-color', '#' + $scope.cp1_Hex);
+                // SLIDER
+                // bottom
+                angular.element('#cp1_barL3').css('background-color', '#' + $scope.cp1_Hex);
 
-            // top				
-            $scope.cp1_barL4_src = clientFilesPath + 'bar-brightness.png';
+                // top				
+                $scope.cp1_barL4_src = clientFilesPath + 'bar-brightness.png';
 
 
-            _map.xMaxValue = 359;
-            _map.yMaxValue = 100;
-            _slider.yMaxValue = 100;
-            break;
+                _map.xMaxValue = 359;
+                _map.yMaxValue = 100;
+                _slider.yMaxValue = 100;
+                break;
 
-        case 'r':
-            $scope.cp1_Mode.thesel = 'r';
+            case 'r':
+                $scope.cp1_Mode.thesel = 'r';
 
-            $scope.cp1_mapL2_src = clientFilesPath + 'map-red-max.png';
-            $scope.cp1_mapL1_src = clientFilesPath + 'map-red-min.png';
-            $scope.cp1_barL4_src = clientFilesPath + 'bar-red-tl.png';
-            $scope.cp1_barL3_src = clientFilesPath + 'bar-red-tr.png';
-            $scope.cp1_barL2_src = clientFilesPath + 'bar-red-br.png';
-            $scope.cp1_barL1_src = clientFilesPath + 'bar-red-bl.png';
+                $scope.cp1_mapL2_src = clientFilesPath + 'map-red-max.png';
+                $scope.cp1_mapL1_src = clientFilesPath + 'map-red-min.png';
+                $scope.cp1_barL4_src = clientFilesPath + 'bar-red-tl.png';
+                $scope.cp1_barL3_src = clientFilesPath + 'bar-red-tr.png';
+                $scope.cp1_barL2_src = clientFilesPath + 'bar-red-br.png';
+                $scope.cp1_barL1_src = clientFilesPath + 'bar-red-bl.png';
 
-            break;
+                break;
 
-        case 'g':
-            $scope.cp1_Mode.thesel = 'g';
-            $scope.cp1_mapL2_src = clientFilesPath + 'map-green-max.png';
-            $scope.cp1_mapL1_src = clientFilesPath + 'map-green-min.png';
+            case 'g':
+                $scope.cp1_Mode.thesel = 'g';
+                $scope.cp1_mapL2_src = clientFilesPath + 'map-green-max.png';
+                $scope.cp1_mapL1_src = clientFilesPath + 'map-green-min.png';
 
-            $scope.cp1_barL4_src = clientFilesPath + 'bar-green-tl.png';
-            $scope.cp1_barL3_src = clientFilesPath + 'bar-green-tr.png';
-            $scope.cp1_barL2_src = clientFilesPath + 'bar-green-br.png';
-            $scope.cp1_barL1_src = clientFilesPath + 'bar-green-bl.png';
+                $scope.cp1_barL4_src = clientFilesPath + 'bar-green-tl.png';
+                $scope.cp1_barL3_src = clientFilesPath + 'bar-green-tr.png';
+                $scope.cp1_barL2_src = clientFilesPath + 'bar-green-br.png';
+                $scope.cp1_barL1_src = clientFilesPath + 'bar-green-bl.png';
 
-            break;
+                break;
 
-        case 'b':
-            $scope.cp1_Mode.thesel = 'b';
-            $scope.cp1_mapL2_src = clientFilesPath + 'map-blue-max.png';
-            $scope.cp1_mapL1_src = clientFilesPath + 'map-blue-min.png';
+            case 'b':
+                $scope.cp1_Mode.thesel = 'b';
+                $scope.cp1_mapL2_src = clientFilesPath + 'map-blue-max.png';
+                $scope.cp1_mapL1_src = clientFilesPath + 'map-blue-min.png';
 
-            $scope.cp1_barL4_src = clientFilesPath + 'bar-blue-tl.png';
-            $scope.cp1_barL3_src = clientFilesPath + 'bar-blue-tr.png';
-            $scope.cp1_barL2_src = clientFilesPath + 'bar-blue-br.png';
-            $scope.cp1_barL1_src = clientFilesPath + 'bar-blue-bl.png';
+                $scope.cp1_barL4_src = clientFilesPath + 'bar-blue-tl.png';
+                $scope.cp1_barL3_src = clientFilesPath + 'bar-blue-tr.png';
+                $scope.cp1_barL2_src = clientFilesPath + 'bar-blue-br.png';
+                $scope.cp1_barL1_src = clientFilesPath + 'bar-blue-bl.png';
 
-            break;
+                break;
 
-        default:
-            alert('invalid mode');
-            break;
+            default:
+                alert('invalid mode');
+                break;
         }
         ColorMode = colorMode;
 
         switch (colorMode) {
-        case 'h':
-        case 's':
-        case 'v':
+            case 'h':
+            case 's':
+            case 'v':
 
-            _map.xMinValue = 1;
-            _map.yMinValue = 1;
-            _slider.yMinValue = 1;
-            break;
+                _map.xMinValue = 1;
+                _map.yMinValue = 1;
+                _slider.yMinValue = 1;
+                break;
 
-        case 'r':
-        case 'g':
-        case 'b':
+            case 'r':
+            case 'g':
+            case 'b':
 
-            _map.xMinValue = 0;
-            _map.yMinValue = 0;
-            _slider.yMinValue = 0;
+                _map.xMinValue = 0;
+                _map.yMinValue = 0;
+                _slider.yMinValue = 0;
 
-            _map.xMaxValue = 255;
-            _map.yMaxValue = 255;
-            _slider.yMaxValue = 255;
-            break;
+                _map.xMaxValue = 255;
+                _map.yMaxValue = 255;
+                _slider.yMaxValue = 255;
+                break;
         }
 
         positionMapAndSliderArrows();

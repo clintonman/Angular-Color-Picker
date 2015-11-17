@@ -1,0 +1,50 @@
+/*body,*/
+#cp1_table td {
+    font-family: tahoma;
+    font-size: 10pt;
+    padding:0;
+    margin:0;
+}
+
+#cp1_ColorMap {
+    width: 256px;
+    height: 256px;
+    padding: 0;
+    margin: 0;
+    border: solid 1px #000;
+}
+
+#cp1_ColorMap img{
+    margin: -256px 0px 0px 0px;
+    float:left;
+}
+
+#cp1_ColorMap img:first-child{
+    margin: 0;
+}
+
+#cp1_ColorBar {
+    width: 20px;
+    height: 256px;
+    padding: 0;
+    margin: 0px 10px;
+    border: solid 1px #000;
+}
+
+#cp1_ColorBar img{
+    margin: -256px 0px 0px 0px;
+    float:left;
+}
+
+#cp1_ColorBar img:first-child{
+    margin: 0;
+}
+
+#rangearrows, #mappoint {
+    border:0;
+    margin:0;
+    padding:0;
+    position:absolute;
+    top:0px;
+    left:0px;
+}
