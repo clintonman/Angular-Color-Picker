@@ -92,7 +92,7 @@
             // calculate sizes and ranges
             // BAR
 
-            console.log(this);
+            //console.log(this);
             var pos = this.offset;
             this._areaTop = pos.top;
             this._areaLeft = pos.left;

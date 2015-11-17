@@ -4,12 +4,46 @@ MIT style license
 */
 (function () {
     angular.module("DyerColorPicker", []);
-    
-    angular.module('DyerColorPicker').directive("icrcolorPicker", function(){
-        console.log("create directive");
+
+    angular.module('DyerColorPicker').directive("icrcolorPicker", function () {
         return {
             replace: true,
-            templateUrl: 'refresh_web/colorpicker/colorpickertemplate.html'
+            transclude: true,
+            templateUrl: 'refresh_web/colorpicker/colorpickertemplate.html',
+            link: function ($scope, $elt, $attr) {
+                var action = function () {
+                    
+
+                    _map.indicatorhtml = angular.element('#mappoint');
+                    _slider.indicatorhtml = angular.element('#rangearrows');
+
+                    
+
+                    _map._areaWidth = parseInt(angular.element('#cp1_ColorMap').css('width'));
+                    _map._areaHeight = parseInt(angular.element('#cp1_ColorMap').css('height'));
+                    _map.offset = angular.element('#cp1_ColorMap').offset();
+                    //console.log("map width : " + _map._areaWidth);
+                    //console.log("map height : " + _map._areaHeight);
+                    //console.log("offset : " + _map.offset.left + ", " + _map.offset.top);
+
+
+                    _slider._areaWidth = parseInt(angular.element('#cp1_ColorBar').css('width'));
+                    _slider._areaHeight = parseInt(angular.element('#cp1_ColorBar').css('height'));
+                    _slider.offset = angular.element('#cp1_ColorBar').offset();
+                    //console.log("slider width : " + _slider._areaWidth);
+                    //console.log("slider height : " + _slider._areaHeight);
+                    //console.log("offset : " + _slider.offset.left + ", " + _slider.offset.top);
+
+                    _map.indicatorWidth = parseInt(angular.element('#mappoint').css('width'));
+                    _map.indicatorHeight = parseInt(angular.element('#mappoint').css('height'));
+
+                    _slider.indicatorWidth = parseInt(angular.element('#rangearrows').css('width'));
+                    _slider.indicatorHeight = parseInt(angular.element('#rangearrows').css('height'));
+                    setColorMode(settings.startMode);
+                };
+                action();
+                //$timeout(action, 0);
+            }
         }
     });
 
@@ -22,12 +56,29 @@ MIT style license
         };
 
         var theMouseIsDown = false;
-        var ColorMode = 's';
+        ColorMode = 's';
         var mapactive = false;
         var baractive = false;
 
-        var _map = positionindicatorfactory["_map"];
-        var _slider = positionindicatorfactory["_slider"];
+        _map = positionindicatorfactory["_map"];
+        _slider = positionindicatorfactory["_slider"];
+        
+        _map.mouse = {};
+                    _map.mouse.x = 0;
+                    _map.mouse.y = 0;
+                    _slider.mouse = {};
+                    _slider.mouse.x = 0;
+                    _slider.mouse.y = 0;
+        _map.xMaxValue = 359;
+                    _map.yMaxValue = 100;
+                    _slider.yMaxValue = 100;
+                    _map.xMinValue = 1;
+                    _map.yMinValue = 1;
+                    _slider.yMinValue = 1;
+
+                    _slider.yValue = 33;
+                    _map.xValue = 34;
+                    _map.yValue = 35;
 
         _map.ValueChanged = function () {
             // update values
@@ -137,52 +188,6 @@ MIT style license
 
             updateVisuals();
         };
-
-
-
-        //NOT UNDERSTANDING SOMETHING -why need define? maybe because is a function and var is private to it, need : format?
-        //rest stuff below is defining public versions so it works?
-        _map.mouse = {};
-        _map.mouse.x = 0;
-        _map.mouse.y = 0;
-        _slider.mouse = {};
-        _slider.mouse.x = 0;
-        _slider.mouse.y = 0;
-
-        _map.indicatorhtml = angular.element('#mappoint');
-        _slider.indicatorhtml = angular.element('#rangearrows');
-
-        _map.xMaxValue = 359;
-        _map.yMaxValue = 100;
-        _slider.yMaxValue = 100;
-        _map.xMinValue = 1;
-        _map.yMinValue = 1;
-        _slider.yMinValue = 1;
-
-        _slider.yValue = 33;
-        _map.xValue = 34;
-        _map.yValue = 35;
-
-        _map._areaWidth = parseInt(angular.element('#cp1_ColorMap').css('width'));
-        _map._areaHeight = parseInt(angular.element('#cp1_ColorMap').css('height'));
-        _map.offset = angular.element('#cp1_ColorMap').offset();
-        //console.log("map width : " + _map._areaWidth);
-        //console.log("map height : " + _map._areaHeight);
-        //console.log("offset : " + _map.offset.left + ", " + _map.offset.top);
-
-        _slider._areaWidth = parseInt(angular.element('#cp1_ColorBar').css('width'));
-        _slider._areaHeight = parseInt(angular.element('#cp1_ColorBar').css('height'));
-        _slider.offset = angular.element('#cp1_ColorBar').offset();
-        //console.log("slider width : " + _slider._areaWidth);
-        //console.log("slider height : " + _slider._areaHeight);
-        //console.log("offset : " + _slider.offset.left + ", " + _slider.offset.top);
-
-        _map.indicatorWidth = parseInt(angular.element('#mappoint').css('width'));
-        _map.indicatorHeight = parseInt(angular.element('#mappoint').css('height'));
-
-        _slider.indicatorWidth = parseInt(angular.element('#rangearrows').css('width'));
-        _slider.indicatorHeight = parseInt(angular.element('#rangearrows').css('height'));
-
 
         $scope.mapmousedown = function (event) {
             //console.log("mouse down");
@@ -369,7 +374,7 @@ MIT style license
             thesel: null
         };
 
-        var settings = {
+        settings = {
             startHex: '22cc33',
             startMode: 's'
         };
@@ -385,10 +390,7 @@ MIT style license
         $scope.cp1_Saturation_val = hsv.s;
         $scope.cp1_Brightness_val = hsv.v;
 
-        setColorMode(settings.startMode);
-
         $scope.cp1_Preview_style["background-color"] = '#' + $scope.cp1_Hex;
-
 
         function updateVisuals() {
             updatePreview();
@@ -579,7 +581,8 @@ MIT style license
 
 
 
-        function setColorMode(colorMode) {
+        //function setColorMode(colorMode) {
+        setColorMode = function (colorMode) {
 
             function resetImageStyle(imgid) {
                 angular.element(imgid).css('opacity', 1);
