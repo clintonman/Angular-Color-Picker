@@ -7,32 +7,22 @@ MIT style license
 
     angular.module('DyerColorPicker').directive("icrcolorPicker", function () {
         return {
-            replace: true,
+            //replace: true,
             transclude: true,
             templateUrl: 'refresh_web/colorpicker/colorpickertemplate.html',
             link: function ($scope, $elt, $attr) {
                 var action = function () {
-                    
 
                     _map.indicatorhtml = angular.element('#mappoint');
                     _slider.indicatorhtml = angular.element('#rangearrows');
 
-                    
-
                     _map._areaWidth = parseInt(angular.element('#cp1_ColorMap').css('width'));
                     _map._areaHeight = parseInt(angular.element('#cp1_ColorMap').css('height'));
                     _map.offset = angular.element('#cp1_ColorMap').offset();
-                    //console.log("map width : " + _map._areaWidth);
-                    //console.log("map height : " + _map._areaHeight);
-                    //console.log("offset : " + _map.offset.left + ", " + _map.offset.top);
-
 
                     _slider._areaWidth = parseInt(angular.element('#cp1_ColorBar').css('width'));
                     _slider._areaHeight = parseInt(angular.element('#cp1_ColorBar').css('height'));
                     _slider.offset = angular.element('#cp1_ColorBar').offset();
-                    //console.log("slider width : " + _slider._areaWidth);
-                    //console.log("slider height : " + _slider._areaHeight);
-                    //console.log("offset : " + _slider.offset.left + ", " + _slider.offset.top);
 
                     _map.indicatorWidth = parseInt(angular.element('#mappoint').css('width'));
                     _map.indicatorHeight = parseInt(angular.element('#mappoint').css('height'));
@@ -62,23 +52,23 @@ MIT style license
 
         _map = positionindicatorfactory["_map"];
         _slider = positionindicatorfactory["_slider"];
-        
-        _map.mouse = {};
-                    _map.mouse.x = 0;
-                    _map.mouse.y = 0;
-                    _slider.mouse = {};
-                    _slider.mouse.x = 0;
-                    _slider.mouse.y = 0;
-        _map.xMaxValue = 359;
-                    _map.yMaxValue = 100;
-                    _slider.yMaxValue = 100;
-                    _map.xMinValue = 1;
-                    _map.yMinValue = 1;
-                    _slider.yMinValue = 1;
 
-                    _slider.yValue = 33;
-                    _map.xValue = 34;
-                    _map.yValue = 35;
+        _map.mouse = {};
+        _map.mouse.x = 0;
+        _map.mouse.y = 0;
+        _slider.mouse = {};
+        _slider.mouse.x = 0;
+        _slider.mouse.y = 0;
+        _map.xMaxValue = 359;
+        _map.yMaxValue = 100;
+        _slider.yMaxValue = 100;
+        _map.xMinValue = 1;
+        _map.yMinValue = 1;
+        _slider.yMinValue = 1;
+
+        _slider.yValue = 33;
+        _map.xValue = 34;
+        _map.yValue = 35;
 
         _map.ValueChanged = function () {
             // update values
@@ -190,15 +180,8 @@ MIT style license
         };
 
         $scope.mapmousedown = function (event) {
-            //console.log("mouse down");
             theMouseIsDown = true;
-            //var xpos = parseInt(event.pageX - _map.offset.left);
-            //var ypos = parseInt(event.pageY - _map.offset.top);
-            //_map.xValue = xpos;
-            //_map.yValue = ypos;
 
-            //msg = xpos + ", " + ypos;
-            //console.log(msg);
             _map.mouse.x = event.pageX;
             _map.mouse.y = event.pageY;
 
@@ -210,12 +193,9 @@ MIT style license
         };
 
         $scope.barmousedown = function (event) {
-            //console.log("mouse down");
-            theMouseIsDown = true;
-            //var xpos = parseInt(event.pageX - _slider.offset.left);
-            //var ypos = parseInt(event.pageY - _slider.offset.top);
 
-            //msg = xpos + ", " + ypos;
+            theMouseIsDown = true;
+
             _slider.mouse.x = event.pageX;
             _slider.mouse.y = event.pageY;
             _slider.setValuesFromMousePosition();
@@ -224,7 +204,7 @@ MIT style license
         };
 
         $scope.mouseup = function (event) {
-            //console.log("mouse up");
+
             theMouseIsDown = false;
             mapactive = false;
             baractive = false;
@@ -749,14 +729,4 @@ MIT style license
     });
 
 })();
-//app.controller(MainController, "MainController");
 
-/*(function () {
-    angular.module('DyerColorPicker').directive("icrcolorPicker", function(){
-        console.log("create directive");
-        return {
-            replace: true,
-            templateUrl: 'refresh_web/colorpicker/colorpickertemplate.html'
-        }
-    });
-})();*/

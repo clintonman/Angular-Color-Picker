@@ -92,7 +92,6 @@
             // calculate sizes and ranges
             // BAR
 
-            //console.log(this);
             var pos = this.offset;
             this._areaTop = pos.top;
             this._areaLeft = pos.left;
@@ -106,7 +105,6 @@
 
             this.MaxX = this._areaRight;
             this.MinY = this._areaBottom;
-
         };
 
         positionIndicator.prototype._setIndicatorPosition = function (offsetX, offsetY) {
@@ -118,13 +116,8 @@
             if (offsetY < 0) offsetY = 0
             if (offsetY > 255) offsetY = 255;
 
-            var posX = this._areaLeft + offsetX;
-            var posY = this._areaTop + offsetY;
-            //console.log("posA : " + posX + ", " + posY);
-            //console.log("top : " + this._areaTop);
-            //console.log("offsetxy : " + offsetX + ", " + offsetY);
-            //console.log("pos : " + posX + ", " + posY);
-            //console.log("widths : " + this.indicatorWidth + ", " + this._areaWidth);
+            var posX = this._areaLeft + offsetX -8;//-8 and -4 magic numbers til figure whats what
+            var posY = this._areaTop + offsetY-4;
 
             // check if the arrow is bigger than the bar area
             if (this.indicatorWidth > this._areaWidth) {
@@ -140,11 +133,9 @@
 
             posX = parseInt(posX);
             posY = parseInt(posY);
-            //console.log("pos : " + posX + ", " + posY);
 
             this.indicatorhtml.css('left', posX + 'px');
             this.indicatorhtml.css('top', posY + 'px');
-
         };
 
 
