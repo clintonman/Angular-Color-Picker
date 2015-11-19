@@ -9,7 +9,7 @@ MIT style license
         return {
             //replace: true,
             transclude: true,
-            templateUrl: 'refresh_web/colorpicker/colorpickertemplate.html',
+            templateUrl: 'colorpicker/colorpickertemplate.html',
             link: function ($scope, $elt, $attr) {
                 var action = function () {
 
@@ -39,7 +39,7 @@ MIT style license
 
     angular.module('DyerColorPicker').controller("MainController", function ($scope, colormethods, positionindicatorfactory) {
 
-        var clientFilesPath = 'refresh_web/colorpicker/images/';
+        var clientFilesPath = 'colorpicker/images/';
 
         $scope.RadioClick = function () {
             setColorMode($scope.cp1_Mode.thesel);
