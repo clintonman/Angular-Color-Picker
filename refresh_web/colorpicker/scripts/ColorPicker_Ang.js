@@ -9,7 +9,6 @@ MIT style license
     
     function icrcolorpicker() {
         return {
-            //replace: true,
             transclude: true,
             templateUrl: 'colorpicker/colorpickertemplate.html',
             controllerAs: 'vm',
@@ -32,10 +31,10 @@ MIT style license
 
                     _slider.indicatorWidth = parseInt(angular.element('#rangearrows').css('width'));
                     _slider.indicatorHeight = parseInt(angular.element('#rangearrows').css('height'));
+										
                     setColorMode(settings.startMode);
                 };
                 action();
-                //$timeout(action, 0);
             }
         }
     }
@@ -78,7 +77,6 @@ MIT style license
 
         _map.ValueChanged = function () {
             // update values
-
             switch (ColorMode) {
                 case 'h':
                     vm.cp1_Saturation_val = this.xValue;
@@ -132,12 +130,10 @@ MIT style license
                     });
                     break;
             }
-
             updateVisuals();
         };
 
         _slider.ValueChanged = function () {
-
             switch (ColorMode) {
                 case 'h':
                     vm.cp1_Hue_val = 360 - this.yValue;
@@ -181,7 +177,6 @@ MIT style license
                     });
                     break;
             }
-
             updateVisuals();
         };
 
@@ -195,13 +190,10 @@ MIT style license
             _map.setValuesFromMousePosition();
 
             mapactive = true;
-
         };
 
         vm.barmousedown = function (event) {
-
             theMouseIsDown = true;
-
             _slider.mouse.x = event.pageX;
             _slider.mouse.y = event.pageY;
             _slider.setValuesFromMousePosition();
@@ -210,19 +202,16 @@ MIT style license
         };
 
         vm.mouseup = function (event) {
-
             theMouseIsDown = false;
             mapactive = false;
             baractive = false;
         };
 
         vm.mouseleave = function (event) {
-
             theMouseIsDown = false;
             mapactive = false;
             baractive = false;
         };
-
 
         vm.mousemove = function (event) {
             if (!theMouseIsDown)
@@ -292,7 +281,6 @@ MIT style license
         }
 
         function setHex(hex) {
-
             var rgb = colormethods.hexToRgb(hex);
             vm.cp1_Red_val = rgb.r;
             vm.cp1_Green_val = rgb.g;
@@ -365,6 +353,7 @@ MIT style license
             startMode: 's'
         };
         vm.cp1_Hex = settings.startHex;
+				vm.cp1_Mode.thesel = 's';
 
         var rgb = colormethods.hexToRgb(vm.cp1_Hex);
         vm.cp1_Red_val = rgb.r;
@@ -390,7 +379,6 @@ MIT style license
 
         // start of whole indicator process, not inside prototype
         function positionMapAndSliderArrows() {
-
             var maxHue = 360; // ? 359 ?
             var maxBright = 100;
             var maxSaturation = 100;
@@ -468,7 +456,6 @@ MIT style license
 
 
         function updateMapVisuals() {
-
             switch (ColorMode) {
                 case 'h':
                     // fake color with only hue
@@ -559,13 +546,9 @@ MIT style license
                     angular.element('#cp1_barL3').css('opacity', '#' + (vertPer > horzPer) ? horzPer : vertPer);
                     angular.element('#cp1_barL2').css('opacity', '#' + (vertPerRev > horzPer) ? horzPer : vertPerRev);
                     angular.element('#cp1_barL1').css('opacity', '#' + (vertPerRev > horzPerRev) ? horzPerRev : vertPerRev);
-
                     break;
-
             }
         }
-
-
 
         //function setColorMode(colorMode) {
         setColorMode = function (colorMode) {
@@ -589,11 +572,8 @@ MIT style license
             vm.cp1_barL3_src = clientFilesPath + 'blank.gif';
             vm.cp1_barL4_src = clientFilesPath + 'blank.gif';
 
-
             switch (colorMode) {
                 case 'h':
-                    vm.cp1_Mode.thesel = 'h';
-
                     // MAP
                     // put a color layer on the bottom
                     angular.element('#cp1_mapL1').css('background-color', '#' + vm.cp1_Hex);
@@ -610,13 +590,9 @@ MIT style license
                     _map.xMaxValue = 100;
                     _map.yMaxValue = 100;
                     _slider.yMaxValue = 359;
-
                     break;
 
                 case 's':
-                    //this._saturationRadio.checked = true;	
-                    vm.cp1_Mode.thesel = 's';
-
                     // MAP
                     // bottom has saturation map
                     vm.cp1_mapL1_src = clientFilesPath + 'map-saturation.png';
@@ -635,12 +611,9 @@ MIT style license
                     _map.xMaxValue = 359;
                     _map.yMaxValue = 100;
                     _slider.yMaxValue = 100;
-
                     break;
 
                 case 'v':
-                    vm.cp1_Mode.thesel = 'v';
-
                     // MAP
                     // bottom: nothing
 
@@ -662,19 +635,15 @@ MIT style license
                     break;
 
                 case 'r':
-                    vm.cp1_Mode.thesel = 'r';
-
                     vm.cp1_mapL2_src = clientFilesPath + 'map-red-max.png';
                     vm.cp1_mapL1_src = clientFilesPath + 'map-red-min.png';
                     vm.cp1_barL4_src = clientFilesPath + 'bar-red-tl.png';
                     vm.cp1_barL3_src = clientFilesPath + 'bar-red-tr.png';
                     vm.cp1_barL2_src = clientFilesPath + 'bar-red-br.png';
                     vm.cp1_barL1_src = clientFilesPath + 'bar-red-bl.png';
-
                     break;
 
                 case 'g':
-                    vm.cp1_Mode.thesel = 'g';
                     vm.cp1_mapL2_src = clientFilesPath + 'map-green-max.png';
                     vm.cp1_mapL1_src = clientFilesPath + 'map-green-min.png';
 
@@ -682,11 +651,9 @@ MIT style license
                     vm.cp1_barL3_src = clientFilesPath + 'bar-green-tr.png';
                     vm.cp1_barL2_src = clientFilesPath + 'bar-green-br.png';
                     vm.cp1_barL1_src = clientFilesPath + 'bar-green-bl.png';
-
                     break;
 
                 case 'b':
-                    vm.cp1_Mode.thesel = 'b';
                     vm.cp1_mapL2_src = clientFilesPath + 'map-blue-max.png';
                     vm.cp1_mapL1_src = clientFilesPath + 'map-blue-min.png';
 
@@ -694,7 +661,6 @@ MIT style license
                     vm.cp1_barL3_src = clientFilesPath + 'bar-blue-tr.png';
                     vm.cp1_barL2_src = clientFilesPath + 'bar-blue-br.png';
                     vm.cp1_barL1_src = clientFilesPath + 'bar-blue-bl.png';
-
                     break;
 
                 default:
@@ -726,13 +692,10 @@ MIT style license
                     _slider.yMaxValue = 255;
                     break;
             }
-
             positionMapAndSliderArrows();
-
             updateMapVisuals();
             updateSliderVisuals();
         }
     }
-
 })();
 
