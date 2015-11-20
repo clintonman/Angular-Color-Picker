@@ -5,12 +5,15 @@ MIT style license
 (function () {
     angular.module("DyerColorPicker", []);
 
-    angular.module('DyerColorPicker').directive("icrcolorPicker", function () {
+    angular.module('DyerColorPicker').directive("icrcolorPicker", icrcolorpicker);
+    
+    function icrcolorpicker() {
         return {
             //replace: true,
             transclude: true,
             templateUrl: 'colorpicker/colorpickertemplate.html',
-            link: function ($scope, $elt, $attr) {
+            controllerAs: 'vm',
+            link: function (scope, el, attr) {
                 var action = function () {
 
                     _map.indicatorhtml = angular.element('#mappoint');
@@ -35,14 +38,17 @@ MIT style license
                 //$timeout(action, 0);
             }
         }
-    });
-
-    angular.module('DyerColorPicker').controller("MainController", function ($scope, colormethods, positionindicatorfactory) {
+    }
+        
+    angular.module('DyerColorPicker').controller("MainController", MainController);
+    
+    function MainController(colormethods, positionindicatorfactory) {
+        var vm = this;
 
         var clientFilesPath = 'colorpicker/images/';
 
-        $scope.RadioClick = function () {
-            setColorMode($scope.cp1_Mode.thesel);
+        vm.RadioClick = function () {
+            setColorMode(vm.cp1_Mode.thesel);
         };
 
         var theMouseIsDown = false;
@@ -75,33 +81,33 @@ MIT style license
 
             switch (ColorMode) {
                 case 'h':
-                    $scope.cp1_Saturation_val = this.xValue;
-                    $scope.cp1_Brightness_val = 100 - this.yValue;
+                    vm.cp1_Saturation_val = this.xValue;
+                    vm.cp1_Brightness_val = 100 - this.yValue;
                     break;
 
                 case 's':
-                    $scope.cp1_Hue_val = this.xValue;
-                    $scope.cp1_Brightness_val = 100 - this.yValue;
+                    vm.cp1_Hue_val = this.xValue;
+                    vm.cp1_Brightness_val = 100 - this.yValue;
                     break;
 
                 case 'v':
-                    $scope.cp1_Hue_val = this.xValue;
-                    $scope.cp1_Saturation_val = 100 - this.yValue;
+                    vm.cp1_Hue_val = this.xValue;
+                    vm.cp1_Saturation_val = 100 - this.yValue;
                     break;
 
                 case 'r':
-                    $scope.cp1_Blue_val = this.xValue;
-                    $scope.cp1_Green_val = 256 - this.yValue;
+                    vm.cp1_Blue_val = this.xValue;
+                    vm.cp1_Green_val = 256 - this.yValue;
                     break;
 
                 case 'g':
-                    $scope.cp1_Blue_val = this.xValue;
-                    $scope.cp1_Red_val = 256 - this.yValue;
+                    vm.cp1_Blue_val = this.xValue;
+                    vm.cp1_Red_val = 256 - this.yValue;
                     break;
 
                 case 'b':
-                    $scope.cp1_Red_val = this.xValue;
-                    $scope.cp1_Green_val = 256 - this.yValue;
+                    vm.cp1_Red_val = this.xValue;
+                    vm.cp1_Green_val = 256 - this.yValue;
                     break;
             }
 
@@ -110,9 +116,9 @@ MIT style license
                 case 's':
                 case 'v':
                     setHsv({
-                        h: $scope.cp1_Hue_val,
-                        s: $scope.cp1_Saturation_val,
-                        v: $scope.cp1_Brightness_val
+                        h: vm.cp1_Hue_val,
+                        s: vm.cp1_Saturation_val,
+                        v: vm.cp1_Brightness_val
                     });
                     break;
 
@@ -120,9 +126,9 @@ MIT style license
                 case 'g':
                 case 'b':
                     setRgb({
-                        r: $scope.cp1_Red_val,
-                        g: $scope.cp1_Green_val,
-                        b: $scope.cp1_Blue_val
+                        r: vm.cp1_Red_val,
+                        g: vm.cp1_Green_val,
+                        b: vm.cp1_Blue_val
                     });
                     break;
             }
@@ -134,23 +140,23 @@ MIT style license
 
             switch (ColorMode) {
                 case 'h':
-                    $scope.cp1_Hue_val = 360 - this.yValue;
+                    vm.cp1_Hue_val = 360 - this.yValue;
                     break;
                 case 's':
-                    $scope.cp1_Saturation_val = 100 - this.yValue;
+                    vm.cp1_Saturation_val = 100 - this.yValue;
                     break;
                 case 'v':
-                    $scope.cp1_Brightness_val = 100 - this.yValue;
+                    vm.cp1_Brightness_val = 100 - this.yValue;
                     break;
 
                 case 'r':
-                    $scope.cp1_Red_val = 255 - this.yValue;
+                    vm.cp1_Red_val = 255 - this.yValue;
                     break;
                 case 'g':
-                    $scope.cp1_Green_val = 255 - this.yValue;
+                    vm.cp1_Green_val = 255 - this.yValue;
                     break;
                 case 'b':
-                    $scope.cp1_Blue_val = 255 - this.yValue;
+                    vm.cp1_Blue_val = 255 - this.yValue;
                     break;
             }
 
@@ -159,9 +165,9 @@ MIT style license
                 case 's':
                 case 'v':
                     setHsv({
-                        h: $scope.cp1_Hue_val,
-                        s: $scope.cp1_Saturation_val,
-                        v: $scope.cp1_Brightness_val
+                        h: vm.cp1_Hue_val,
+                        s: vm.cp1_Saturation_val,
+                        v: vm.cp1_Brightness_val
                     });
                     break;
 
@@ -169,9 +175,9 @@ MIT style license
                 case 'g':
                 case 'b':
                     setRgb({
-                        r: $scope.cp1_Red_val,
-                        g: $scope.cp1_Green_val,
-                        b: $scope.cp1_Blue_val
+                        r: vm.cp1_Red_val,
+                        g: vm.cp1_Green_val,
+                        b: vm.cp1_Blue_val
                     });
                     break;
             }
@@ -179,7 +185,7 @@ MIT style license
             updateVisuals();
         };
 
-        $scope.mapmousedown = function (event) {
+        vm.mapmousedown = function (event) {
             theMouseIsDown = true;
 
             _map.mouse.x = event.pageX;
@@ -192,7 +198,7 @@ MIT style license
 
         };
 
-        $scope.barmousedown = function (event) {
+        vm.barmousedown = function (event) {
 
             theMouseIsDown = true;
 
@@ -203,14 +209,14 @@ MIT style license
             baractive = true;
         };
 
-        $scope.mouseup = function (event) {
+        vm.mouseup = function (event) {
 
             theMouseIsDown = false;
             mapactive = false;
             baractive = false;
         };
 
-        $scope.mouseleave = function (event) {
+        vm.mouseleave = function (event) {
 
             theMouseIsDown = false;
             mapactive = false;
@@ -218,7 +224,7 @@ MIT style license
         };
 
 
-        $scope.mousemove = function (event) {
+        vm.mousemove = function (event) {
             if (!theMouseIsDown)
                 return;
 
@@ -234,32 +240,32 @@ MIT style license
             }
         };
 
-        $scope.onHsvChange = function () {
+        vm.onHsvChange = function () {
             console.log("onhsvchange");
             console.log(colorstuff);
             validateHsv();
             setHsv({
-                h: $scope.cp1_Hue_val,
-                s: $scope.cp1_Saturation_val,
-                v: $scope.cp1_Brightness_val
+                h: vm.cp1_Hue_val,
+                s: vm.cp1_Saturation_val,
+                v: vm.cp1_Brightness_val
             });
             updateVisuals();
             positionMapAndSliderArrows();
         };
-        $scope.onRgbChange = function () {
+        vm.onRgbChange = function () {
             validateRgb();
             setRgb({
-                r: $scope.cp1_Red_val,
-                g: $scope.cp1_Green_val,
-                b: $scope.cp1_Blue_val
+                r: vm.cp1_Red_val,
+                g: vm.cp1_Green_val,
+                b: vm.cp1_Blue_val
             });
             updateVisuals();
             positionMapAndSliderArrows();
         };
 
-        $scope.onHexChange = function () {
+        vm.onHexChange = function () {
             if (validateHex()) {
-                setHex($scope.cp1_Hex);
+                setHex(vm.cp1_Hex);
                 updateVisuals();
                 positionMapAndSliderArrows();
             }
@@ -267,56 +273,56 @@ MIT style license
 
         function setHsv(hsv) {
             var rgb = colormethods.hsvToRgb(hsv);
-            $scope.cp1_Red_val = rgb.r;
-            $scope.cp1_Green_val = rgb.g;
-            $scope.cp1_Blue_val = rgb.b;
+            vm.cp1_Red_val = rgb.r;
+            vm.cp1_Green_val = rgb.g;
+            vm.cp1_Blue_val = rgb.b;
 
             var hex = colormethods.rgbToHex(rgb);
-            $scope.cp1_Hex = hex;
+            vm.cp1_Hex = hex;
         }
 
         function setRgb(rgb) {
             var hsv = colormethods.rgbToHsv(rgb);
-            $scope.cp1_Hue_val = hsv.h;
-            $scope.cp1_Saturation_val = hsv.s;
-            $scope.cp1_Brightness_val = hsv.v;
+            vm.cp1_Hue_val = hsv.h;
+            vm.cp1_Saturation_val = hsv.s;
+            vm.cp1_Brightness_val = hsv.v;
 
             var hex = colormethods.rgbToHex(rgb);
-            $scope.cp1_Hex = hex;
+            vm.cp1_Hex = hex;
         }
 
         function setHex(hex) {
 
             var rgb = colormethods.hexToRgb(hex);
-            $scope.cp1_Red_val = rgb.r;
-            $scope.cp1_Green_val = rgb.g;
-            $scope.cp1_Blue_val = rgb.b;
+            vm.cp1_Red_val = rgb.r;
+            vm.cp1_Green_val = rgb.g;
+            vm.cp1_Blue_val = rgb.b;
 
             var hsv = colormethods.rgbToHsv(rgb);
-            $scope.cp1_Hue_val = hsv.h;
-            $scope.cp1_Saturation_val = hsv.s;
-            $scope.cp1_Brightness_val = hsv.v;
+            vm.cp1_Hue_val = hsv.h;
+            vm.cp1_Saturation_val = hsv.s;
+            vm.cp1_Brightness_val = hsv.v;
         }
 
         function validateRgb() {
-            $scope.cp1_Red_val = _setValueInRange($scope.cp1_Red_val, 0, 255);
-            $scope.cp1_Green_val = _setValueInRange($scope.cp1_Green_val, 0, 255);
-            $scope.cp1_Blue_val = _setValueInRange($scope.cp1_Blue_val, 0, 255);
+            vm.cp1_Red_val = _setValueInRange(vm.cp1_Red_val, 0, 255);
+            vm.cp1_Green_val = _setValueInRange(vm.cp1_Green_val, 0, 255);
+            vm.cp1_Blue_val = _setValueInRange(vm.cp1_Blue_val, 0, 255);
         }
 
         function validateHsv() {
-            $scope.cp1_Hue_val = _setValueInRange($scope.cp1_Hue_val, 0, 359);
-            $scope.cp1_Saturation_val = _setValueInRange($scope.cp1_Saturation_val, 0, 100);
-            $scope.cp1_Brightness_val = _setValueInRange($scope.cp1_Brightness_val, 0, 100);
+            vm.cp1_Hue_val = _setValueInRange(vm.cp1_Hue_val, 0, 359);
+            vm.cp1_Saturation_val = _setValueInRange(vm.cp1_Saturation_val, 0, 100);
+            vm.cp1_Brightness_val = _setValueInRange(vm.cp1_Brightness_val, 0, 100);
         }
 
         function validateHex() {
-            var hex = new String($scope.cp1_Hex).toUpperCase();
+            var hex = new String(vm.cp1_Hex).toUpperCase();
             hex = hex.replace(/[^A-F0-9]/g, '0');
             if (hex.length > 6) hex = hex.substring(0, 6);
             if (hex.length < 6)
                 return false;
-            $scope.cp1_Hex = hex;
+            vm.cp1_Hex = hex;
             return true;
         }
 
@@ -333,15 +339,15 @@ MIT style license
             return value;
         }
 
-        $scope.cp1_mapL1_src = clientFilesPath + "blank.gif";
-        $scope.cp1_mapL2_src = clientFilesPath + "blank.gif";
+        vm.cp1_mapL1_src = clientFilesPath + "blank.gif";
+        vm.cp1_mapL2_src = clientFilesPath + "blank.gif";
 
-        $scope.cp1_barL1_src = clientFilesPath + "blank.gif";
-        $scope.cp1_barL2_src = clientFilesPath + "blank.gif";
-        $scope.cp1_barL3_src = clientFilesPath + "blank.gif";
-        $scope.cp1_barL4_src = clientFilesPath + "bar-brightness.png";
+        vm.cp1_barL1_src = clientFilesPath + "blank.gif";
+        vm.cp1_barL2_src = clientFilesPath + "blank.gif";
+        vm.cp1_barL3_src = clientFilesPath + "blank.gif";
+        vm.cp1_barL4_src = clientFilesPath + "bar-brightness.png";
 
-        $scope.cp1_Preview_style = {
+        vm.cp1_Preview_style = {
             'width': '60px',
             'height': '60px',
             'background-color': '#fff',
@@ -350,7 +356,7 @@ MIT style license
             border: 'solid 1px #000'
         };
 
-        $scope.cp1_Mode = {
+        vm.cp1_Mode = {
             thesel: null
         };
 
@@ -358,19 +364,19 @@ MIT style license
             startHex: '22cc33',
             startMode: 's'
         };
-        $scope.cp1_Hex = settings.startHex;
+        vm.cp1_Hex = settings.startHex;
 
-        var rgb = colormethods.hexToRgb($scope.cp1_Hex);
-        $scope.cp1_Red_val = rgb.r;
-        $scope.cp1_Green_val = rgb.g;
-        $scope.cp1_Blue_val = rgb.b;
+        var rgb = colormethods.hexToRgb(vm.cp1_Hex);
+        vm.cp1_Red_val = rgb.r;
+        vm.cp1_Green_val = rgb.g;
+        vm.cp1_Blue_val = rgb.b;
 
         var hsv = colormethods.rgbToHsv(rgb);
-        $scope.cp1_Hue_val = hsv.h;
-        $scope.cp1_Saturation_val = hsv.s;
-        $scope.cp1_Brightness_val = hsv.v;
+        vm.cp1_Hue_val = hsv.h;
+        vm.cp1_Saturation_val = hsv.s;
+        vm.cp1_Brightness_val = hsv.v;
 
-        $scope.cp1_Preview_style["background-color"] = '#' + $scope.cp1_Hex;
+        vm.cp1_Preview_style["background-color"] = '#' + vm.cp1_Hex;
 
         function updateVisuals() {
             updatePreview();
@@ -379,7 +385,7 @@ MIT style license
         }
 
         function updatePreview() {
-            $scope.cp1_Preview_style["background-color"] = '#' + $scope.cp1_Hex;
+            vm.cp1_Preview_style["background-color"] = '#' + vm.cp1_Hex;
         }
 
         // start of whole indicator process, not inside prototype
@@ -394,27 +400,27 @@ MIT style license
             var sliderValue = 0;
             switch (ColorMode) {
                 case 'h':
-                    sliderValue = maxHue - $scope.cp1_Hue_val;
+                    sliderValue = maxHue - vm.cp1_Hue_val;
                     break;
 
                 case 's':
-                    sliderValue = maxSaturation - $scope.cp1_Saturation_val;
+                    sliderValue = maxSaturation - vm.cp1_Saturation_val;
                     break;
 
                 case 'v':
-                    sliderValue = maxBright - $scope.cp1_Brightness_val;
+                    sliderValue = maxBright - vm.cp1_Brightness_val;
                     break;
 
                 case 'r':
-                    sliderValue = maxRGB - $scope.cp1_Red_val;
+                    sliderValue = maxRGB - vm.cp1_Red_val;
                     break;
 
                 case 'g':
-                    sliderValue = maxRGB - $scope.cp1_Green_val;
+                    sliderValue = maxRGB - vm.cp1_Green_val;
                     break;
 
                 case 'b':
-                    sliderValue = maxRGB - $scope.cp1_Blue_val;
+                    sliderValue = maxRGB - vm.cp1_Blue_val;
                     break;
             }
 
@@ -426,33 +432,33 @@ MIT style license
             var mapYValue = 0;
             switch (ColorMode) {
                 case 'h':
-                    mapXValue = $scope.cp1_Saturation_val;
-                    mapYValue = maxBright - $scope.cp1_Brightness_val;
+                    mapXValue = vm.cp1_Saturation_val;
+                    mapYValue = maxBright - vm.cp1_Brightness_val;
                     break;
 
                 case 's':
-                    mapXValue = $scope.cp1_Hue_val;
-                    mapYValue = maxBright - $scope.cp1_Brightness_val;
+                    mapXValue = vm.cp1_Hue_val;
+                    mapYValue = maxBright - vm.cp1_Brightness_val;
                     break;
 
                 case 'v':
-                    mapXValue = $scope.cp1_Hue_val;
-                    mapYValue = maxSaturation - $scope.cp1_Saturation_val;
+                    mapXValue = vm.cp1_Hue_val;
+                    mapYValue = maxSaturation - vm.cp1_Saturation_val;
                     break;
 
                 case 'r':
-                    mapXValue = $scope.cp1_Blue_val;
-                    mapYValue = maxRGB - $scope.cp1_Green_val;
+                    mapXValue = vm.cp1_Blue_val;
+                    mapYValue = maxRGB - vm.cp1_Green_val;
                     break;
 
                 case 'g':
-                    mapXValue = $scope.cp1_Blue_val;
-                    mapYValue = maxRGB - $scope.cp1_Red_val;
+                    mapXValue = vm.cp1_Blue_val;
+                    mapYValue = maxRGB - vm.cp1_Red_val;
                     break;
 
                 case 'b':
-                    mapXValue = $scope.cp1_Red_val;
-                    mapYValue = maxRGB - $scope.cp1_Green_val;
+                    mapXValue = vm.cp1_Red_val;
+                    mapYValue = maxRGB - vm.cp1_Green_val;
                     break;
             }
             _map.xValue = mapXValue;
@@ -467,7 +473,7 @@ MIT style license
                 case 'h':
                     // fake color with only hue
                     var hsv = {
-                        h: $scope.cp1_Hue_val,
+                        h: vm.cp1_Hue_val,
                         s: 100,
                         v: 100
                     };
@@ -478,23 +484,23 @@ MIT style license
                     break;
 
                 case 's':
-                    angular.element('#cp1_mapL2').css('opacity', (100 - $scope.cp1_Saturation_val) / 100);
+                    angular.element('#cp1_mapL2').css('opacity', (100 - vm.cp1_Saturation_val) / 100);
                     break;
 
                 case 'v':
-                    angular.element('#cp1_mapL2').css('opacity', $scope.cp1_Brightness_val / 100);
+                    angular.element('#cp1_mapL2').css('opacity', vm.cp1_Brightness_val / 100);
                     break;
 
                 case 'r':
-                    angular.element('#cp1_mapL2').css('opacity', $scope.cp1_Red_val / 256);
+                    angular.element('#cp1_mapL2').css('opacity', vm.cp1_Red_val / 256);
                     break;
 
                 case 'g':
-                    angular.element('#cp1_mapL2').css('opacity', $scope.cp1_Green_val / 256);
+                    angular.element('#cp1_mapL2').css('opacity', vm.cp1_Green_val / 256);
                     break;
 
                 case 'b':
-                    angular.element('#cp1_mapL2').css('opacity', $scope.cp1_Blue_val / 256);
+                    angular.element('#cp1_mapL2').css('opacity', vm.cp1_Blue_val / 256);
                     break;
             }
         }
@@ -506,9 +512,9 @@ MIT style license
 
                 case 's':
                     var saturatedColor = {
-                        h: $scope.cp1_Hue_val,
+                        h: vm.cp1_Hue_val,
                         s: 100,
-                        v: $scope.cp1_Brightness_val
+                        v: vm.cp1_Brightness_val
                     };
                     var rgb = colormethods.hsvToRgb(saturatedColor);
                     var hexval = colormethods.rgbToHex(rgb);
@@ -517,8 +523,8 @@ MIT style license
 
                 case 'v':
                     var valueColor = {
-                        h: $scope.cp1_Hue_val,
-                        s: $scope.cp1_Saturation_val,
+                        h: vm.cp1_Hue_val,
+                        s: vm.cp1_Saturation_val,
                         v: 100
                     };
                     var rgb = colormethods.hsvToRgb(valueColor);
@@ -533,14 +539,14 @@ MIT style license
                     var vValue = 0;
 
                     if (this.ColorMode == 'r') {
-                        hValue = $scope.cp1_Blue_val;
-                        vValue = $scope.cp1_Green_val;
+                        hValue = vm.cp1_Blue_val;
+                        vValue = vm.cp1_Green_val;
                     } else if (this.ColorMode == 'g') {
-                        hValue = $scope.cp1_Blue_val;
-                        vValue = $scope.cp1_Red_val;
+                        hValue = vm.cp1_Blue_val;
+                        vValue = vm.cp1_Red_val;
                     } else if (this.ColorMode == 'b') {
-                        hValue = $scope.cp1_Red_val;
-                        vValue = $scope.cp1_Green_val;
+                        hValue = vm.cp1_Red_val;
+                        vValue = vm.cp1_Green_val;
                     }
 
                     var horzPer = (hValue / 256);
@@ -576,30 +582,30 @@ MIT style license
             resetImageStyle('#cp1_barL3');
             resetImageStyle('#cp1_barL4');
 
-            $scope.cp1_mapL1_src = clientFilesPath + 'blank.gif';
-            $scope.cp1_mapL2_src = clientFilesPath + 'blank.gif';
-            $scope.cp1_barL1_src = clientFilesPath + 'blank.gif';
-            $scope.cp1_barL2_src = clientFilesPath + 'blank.gif';
-            $scope.cp1_barL3_src = clientFilesPath + 'blank.gif';
-            $scope.cp1_barL4_src = clientFilesPath + 'blank.gif';
+            vm.cp1_mapL1_src = clientFilesPath + 'blank.gif';
+            vm.cp1_mapL2_src = clientFilesPath + 'blank.gif';
+            vm.cp1_barL1_src = clientFilesPath + 'blank.gif';
+            vm.cp1_barL2_src = clientFilesPath + 'blank.gif';
+            vm.cp1_barL3_src = clientFilesPath + 'blank.gif';
+            vm.cp1_barL4_src = clientFilesPath + 'blank.gif';
 
 
             switch (colorMode) {
                 case 'h':
-                    $scope.cp1_Mode.thesel = 'h';
+                    vm.cp1_Mode.thesel = 'h';
 
                     // MAP
                     // put a color layer on the bottom
-                    angular.element('#cp1_mapL1').css('background-color', '#' + $scope.cp1_Hex);
+                    angular.element('#cp1_mapL1').css('background-color', '#' + vm.cp1_Hex);
 
                     // add a hue map on the top
                     angular.element('#cp1_mapL2').css('background-color', 'transparent');
-                    $scope.cp1_mapL2_src = clientFilesPath + 'map-hue.png';
+                    vm.cp1_mapL2_src = clientFilesPath + 'map-hue.png';
                     angular.element('#cp1_mapL2').css('opacity', 1);
 
                     // SLIDER
                     // simple hue map
-                    $scope.cp1_barL4_src = clientFilesPath + 'bar-hue.png';
+                    vm.cp1_barL4_src = clientFilesPath + 'bar-hue.png';
 
                     _map.xMaxValue = 100;
                     _map.yMaxValue = 100;
@@ -609,22 +615,22 @@ MIT style license
 
                 case 's':
                     //this._saturationRadio.checked = true;	
-                    $scope.cp1_Mode.thesel = 's';
+                    vm.cp1_Mode.thesel = 's';
 
                     // MAP
                     // bottom has saturation map
-                    $scope.cp1_mapL1_src = clientFilesPath + 'map-saturation.png';
+                    vm.cp1_mapL1_src = clientFilesPath + 'map-saturation.png';
 
                     // top has overlay
-                    $scope.cp1_mapL2_src = clientFilesPath + 'map-saturation-overlay.png';
+                    vm.cp1_mapL2_src = clientFilesPath + 'map-saturation-overlay.png';
                     angular.element('#cp1_mapL2').css('opacity', 0);
 
                     // SLIDER
                     // bottom: color
-                    angular.element('#cp1_barL3').css('background-color', '#' + $scope.cp1_Hex);
+                    angular.element('#cp1_barL3').css('background-color', '#' + vm.cp1_Hex);
 
                     // top: graduated overlay
-                    $scope.cp1_barL4_src = clientFilesPath + 'bar-saturation.png';
+                    vm.cp1_barL4_src = clientFilesPath + 'bar-saturation.png';
 
                     _map.xMaxValue = 359;
                     _map.yMaxValue = 100;
@@ -633,21 +639,21 @@ MIT style license
                     break;
 
                 case 'v':
-                    $scope.cp1_Mode.thesel = 'v';
+                    vm.cp1_Mode.thesel = 'v';
 
                     // MAP
                     // bottom: nothing
 
                     // top
                     angular.element('#cp1_mapL1').css('background-color', '#000');
-                    $scope.cp1_mapL2_src = clientFilesPath + 'map-brightness.png';
+                    vm.cp1_mapL2_src = clientFilesPath + 'map-brightness.png';
 
                     // SLIDER
                     // bottom
-                    angular.element('#cp1_barL3').css('background-color', '#' + $scope.cp1_Hex);
+                    angular.element('#cp1_barL3').css('background-color', '#' + vm.cp1_Hex);
 
                     // top				
-                    $scope.cp1_barL4_src = clientFilesPath + 'bar-brightness.png';
+                    vm.cp1_barL4_src = clientFilesPath + 'bar-brightness.png';
 
 
                     _map.xMaxValue = 359;
@@ -656,38 +662,38 @@ MIT style license
                     break;
 
                 case 'r':
-                    $scope.cp1_Mode.thesel = 'r';
+                    vm.cp1_Mode.thesel = 'r';
 
-                    $scope.cp1_mapL2_src = clientFilesPath + 'map-red-max.png';
-                    $scope.cp1_mapL1_src = clientFilesPath + 'map-red-min.png';
-                    $scope.cp1_barL4_src = clientFilesPath + 'bar-red-tl.png';
-                    $scope.cp1_barL3_src = clientFilesPath + 'bar-red-tr.png';
-                    $scope.cp1_barL2_src = clientFilesPath + 'bar-red-br.png';
-                    $scope.cp1_barL1_src = clientFilesPath + 'bar-red-bl.png';
+                    vm.cp1_mapL2_src = clientFilesPath + 'map-red-max.png';
+                    vm.cp1_mapL1_src = clientFilesPath + 'map-red-min.png';
+                    vm.cp1_barL4_src = clientFilesPath + 'bar-red-tl.png';
+                    vm.cp1_barL3_src = clientFilesPath + 'bar-red-tr.png';
+                    vm.cp1_barL2_src = clientFilesPath + 'bar-red-br.png';
+                    vm.cp1_barL1_src = clientFilesPath + 'bar-red-bl.png';
 
                     break;
 
                 case 'g':
-                    $scope.cp1_Mode.thesel = 'g';
-                    $scope.cp1_mapL2_src = clientFilesPath + 'map-green-max.png';
-                    $scope.cp1_mapL1_src = clientFilesPath + 'map-green-min.png';
+                    vm.cp1_Mode.thesel = 'g';
+                    vm.cp1_mapL2_src = clientFilesPath + 'map-green-max.png';
+                    vm.cp1_mapL1_src = clientFilesPath + 'map-green-min.png';
 
-                    $scope.cp1_barL4_src = clientFilesPath + 'bar-green-tl.png';
-                    $scope.cp1_barL3_src = clientFilesPath + 'bar-green-tr.png';
-                    $scope.cp1_barL2_src = clientFilesPath + 'bar-green-br.png';
-                    $scope.cp1_barL1_src = clientFilesPath + 'bar-green-bl.png';
+                    vm.cp1_barL4_src = clientFilesPath + 'bar-green-tl.png';
+                    vm.cp1_barL3_src = clientFilesPath + 'bar-green-tr.png';
+                    vm.cp1_barL2_src = clientFilesPath + 'bar-green-br.png';
+                    vm.cp1_barL1_src = clientFilesPath + 'bar-green-bl.png';
 
                     break;
 
                 case 'b':
-                    $scope.cp1_Mode.thesel = 'b';
-                    $scope.cp1_mapL2_src = clientFilesPath + 'map-blue-max.png';
-                    $scope.cp1_mapL1_src = clientFilesPath + 'map-blue-min.png';
+                    vm.cp1_Mode.thesel = 'b';
+                    vm.cp1_mapL2_src = clientFilesPath + 'map-blue-max.png';
+                    vm.cp1_mapL1_src = clientFilesPath + 'map-blue-min.png';
 
-                    $scope.cp1_barL4_src = clientFilesPath + 'bar-blue-tl.png';
-                    $scope.cp1_barL3_src = clientFilesPath + 'bar-blue-tr.png';
-                    $scope.cp1_barL2_src = clientFilesPath + 'bar-blue-br.png';
-                    $scope.cp1_barL1_src = clientFilesPath + 'bar-blue-bl.png';
+                    vm.cp1_barL4_src = clientFilesPath + 'bar-blue-tl.png';
+                    vm.cp1_barL3_src = clientFilesPath + 'bar-blue-tr.png';
+                    vm.cp1_barL2_src = clientFilesPath + 'bar-blue-br.png';
+                    vm.cp1_barL1_src = clientFilesPath + 'bar-blue-bl.png';
 
                     break;
 
@@ -726,7 +732,7 @@ MIT style license
             updateMapVisuals();
             updateSliderVisuals();
         }
-    });
+    }
 
 })();
 

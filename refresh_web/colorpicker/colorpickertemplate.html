@@ -1,109 +1,107 @@
-<div style="padding:20px;border: solid 1px black;float:left" ng-mouseup="mouseup($event)" ng-mousemove="mousemove($event)" ng-mouseleave="mouseleave($event)">
+<div style="padding:20px;border: solid 1px black;float:left" ng-mouseup="cp.mouseup($event)" ng-mousemove="cp.mousemove($event)" ng-mouseleave="cp.mouseleave($event)">
 
     <table id="cp1_table">
         <tr>
             <td valign="top">
-                <div id="cp1_ColorMap" ng-mousedown="mapmousedown($event)">
-                    <img id="cp1_mapL1" ng-src="{{cp1_mapL1_src}}" width="256px" height="256px">
-                    <img id="cp1_mapL2" ng-src="{{cp1_mapL2_src}}" width="256px" height="256px">
+                <div id="cp1_ColorMap" ng-mousedown="cp.mapmousedown($event)">
+                    <img id="cp1_mapL1" ng-src="{{cp.cp1_mapL1_src}}" width="256px" height="256px">
+                    <img id="cp1_mapL2" ng-src="{{cp.cp1_mapL2_src}}" width="256px" height="256px">
                 </div>
             </td>
 
             <td valign="top">
-                <div id="cp1_ColorBar" ng-mousedown="barmousedown($event)">
+                <div id="cp1_ColorBar" ng-mousedown="cp.barmousedown($event)">
 
-                    <img id="cp1_barL1" ng-src="{{cp1_barL1_src}}" width="20px" height="256px">
-                    <img id="cp1_barL2" ng-src="{{cp1_barL2_src}}" width="20px" height="256px">
-                    <img id="cp1_barL3" ng-src="{{cp1_barL3_src}}" width="20px" height="256px">
-                    <img id="cp1_barL4" ng-src="{{cp1_barL4_src}}" width="20px" height="256px">
+                    <img id="cp1_barL1" ng-src="{{cp.cp1_barL1_src}}" width="20px" height="256px">
+                    <img id="cp1_barL2" ng-src="{{cp.cp1_barL2_src}}" width="20px" height="256px">
+                    <img id="cp1_barL3" ng-src="{{cp.cp1_barL3_src}}" width="20px" height="256px">
+                    <img id="cp1_barL4" ng-src="{{cp.cp1_barL4_src}}" width="20px" height="256px">
                 </div>
             </td>
 
             <td valign="top">
-
                 <table>
                     <tr>
                         <td colspan="3">
-                            <div id="cp1_Preview" ng-style="cp1_Preview_style">
+                            <div id="cp1_Preview" ng-style="cp.cp1_Preview_style">
                                 <br />
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <input ng-change="RadioClick()" ng-model="cp1_Mode.thesel" type="radio" id="cp1_HueRadio" name="cp1_Mode" value="h" />
+                            <input ng-change="cp.RadioClick()" ng-model="cp.cp1_Mode.thesel" type="radio" id="cp1_HueRadio" name="cp1_Mode" value="h" />
                         </td>
                         <td>
                             <label for="cp1_HueRadio">H:</label>
                         </td>
                         <td>
-                            <input ng-change="onHsvChange()" type="text" id="cp1_Hue" ng-model="cp1_Hue_val" style="width: 40px;" /> &deg;
+                            <input ng-change="cp.onHsvChange()" type="text" id="cp1_Hue" ng-model="cp.cp1_Hue_val" style="width: 40px;" /> &deg;
                         </td>
                     </tr>
 
                     <tr>
                         <td>
-                            <input ng-change="RadioClick()" ng-model="cp1_Mode.thesel" type="radio" id="cp1_SaturationRadio" name="cp1_Mode" value="s" />
+                            <input ng-change="cp.RadioClick()" ng-model="cp.cp1_Mode.thesel" type="radio" id="cp1_SaturationRadio" name="cp1_Mode" value="s" />
                         </td>
                         <td>
                             <label for="cp1_SaturationRadio">S:</label>
                         </td>
                         <td>
-                            <input ng-change="onHsvChange()" type="text" id="cp1_Saturation" ng-model="cp1_Saturation_val" style="width: 40px;" /> %
+                            <input ng-change="cp.onHsvChange()" type="text" id="cp1_Saturation" ng-model="cp.cp1_Saturation_val" style="width: 40px;" /> %
                         </td>
                     </tr>
 
                     <tr>
                         <td>
-                            <input ng-change="RadioClick()" ng-model="cp1_Mode.thesel" type="radio" id="cp1_BrightnessRadio" name="cp1_Mode" value="v" />
+                            <input ng-change="cp.RadioClick()" ng-model="cp.cp1_Mode.thesel" type="radio" id="cp1_BrightnessRadio" name="cp1_Mode" value="v" />
                         </td>
                         <td>
                             <label for="cp1_BrightnessRadio">B:</label>
                         </td>
                         <td>
-                            <input ng-change="onHsvChange()" type="text" id="cp1_Brightness" ng-model="cp1_Brightness_val" style="width: 40px;" /> %
+                            <input ng-change="cp.onHsvChange()" type="text" id="cp1_Brightness" ng-model="cp.cp1_Brightness_val" style="width: 40px;" /> %
                         </td>
                     </tr>
 
                     <tr>
                         <td colspan="3" height="5">
-
                         </td>
                     </tr>
 
                     <tr>
                         <td>
-                            <input ng-change="RadioClick()" ng-model="cp1_Mode.thesel" type="radio" id="cp1_RedRadio" name="cp1_Mode" value="r" />
+                            <input ng-change="cp.RadioClick()" ng-model="cp.cp1_Mode.thesel" type="radio" id="cp1_RedRadio" name="cp1_Mode" value="r" />
                         </td>
                         <td>
                             <label for="cp1_RedRadio">R:</label>
                         </td>
                         <td>
-                            <input ng-change="onRgbChange()" type="text" id="cp1_Red" ng-model="cp1_Red_val" style="width: 40px;" />
+                            <input ng-change="cp.onRgbChange()" type="text" id="cp1_Red" ng-model="cp.cp1_Red_val" style="width: 40px;" />
                         </td>
                     </tr>
 
                     <tr>
                         <td>
-                            <input ng-change="RadioClick()" ng-model="cp1_Mode.thesel" type="radio" id="cp1_GreenRadio" name="cp1_Mode" value="g" />
+                            <input ng-change="cp.RadioClick()" ng-model="cp.cp1_Mode.thesel" type="radio" id="cp1_GreenRadio" name="cp1_Mode" value="g" />
                         </td>
                         <td>
                             <label for="cp1_GreenRadio">G:</label>
                         </td>
                         <td>
-                            <input ng-change="onRgbChange()" type="text" id="cp1_Green" ng-model="cp1_Green_val" style="width: 40px;" />
+                            <input ng-change="cp.onRgbChange()" type="text" id="cp1_Green" ng-model="cp.cp1_Green_val" style="width: 40px;" />
                         </td>
                     </tr>
 
                     <tr>
                         <td>
-                            <input ng-change="RadioClick()" ng-model="cp1_Mode.thesel" type="radio" id="cp1_BlueRadio" name="cp1_Mode" value="b" />
+                            <input ng-change="cp.RadioClick()" ng-model="cp.cp1_Mode.thesel" type="radio" id="cp1_BlueRadio" name="cp1_Mode" value="b" />
                         </td>
                         <td>
                             <label for="cp1_BlueRadio">B:</label>
                         </td>
                         <td>
-                            <input ng-change="onRgbChange()" type="text" id="cp1_Blue" ng-model="cp1_Blue_val" style="width: 40px;" />
+                            <input ng-change="cp.onRgbChange()" type="text" id="cp1_Blue" ng-model="cp.cp1_Blue_val" style="width: 40px;" />
                         </td>
                     </tr>
 
@@ -113,10 +111,9 @@
                             #:
                         </td>
                         <td colspan="2">
-                            <input ng-change="onHexChange()" type="text" id="cp1_Hex" ng-model="cp1_Hex" style="width: 60px;" />
+                            <input ng-change="cp.onHexChange()" type="text" id="cp1_Hex" ng-model="cp.cp1_Hex" style="width: 60px;" />
                         </td>
                     </tr>
-
                 </table>
             </td>
         </tr>
@@ -157,6 +154,6 @@
 
     </div>
 
-    <img ng-mousedown="mapmousedown($event)" ng-style="mappoint" id="mappoint" src="colorpicker/images/mappoint.gif" alt="">
-    <img ng-mousedown="barmousedown($event)" ng-style="rangearrows" id="rangearrows" src="colorpicker/images/rangearrows.gif" alt="">
+    <img ng-mousedown="cp.mapmousedown($event)" ng-style="mappoint" id="mappoint" src="colorpicker/images/mappoint.gif" alt="">
+    <img ng-mousedown="cp.barmousedown($event)" ng-style="rangearrows" id="rangearrows" src="colorpicker/images/rangearrows.gif" alt="">
 </div>
